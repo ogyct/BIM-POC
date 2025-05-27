@@ -1,0 +1,23 @@
+name: DevOps Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+
+    steps:
+    # - name: Checkout repository
+    #   uses: actions/checkout@v3
+
+    - name: Pull UBI9 Python 3.12 image
+      run: docker pull registry.access.redhat.com/ubi9/python-312
+
+    - name: Run Python print inside container
+      run: docker run --rm registry.access.redhat.com/ubi9/python-312 python3 -c 'print("Hello world")'
+
+    - name: List Docker images on agent
+      run: docker images
