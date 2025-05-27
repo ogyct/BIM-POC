@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Checkout repository
-    #   uses: actions/checkout@v3
-
     - name: Pull UBI9 Python 3.12 image
       run: docker pull registry.access.redhat.com/ubi9/python-312
 
@@ -21,3 +18,10 @@ jobs:
 
     - name: List Docker images on agent
       run: docker images
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run workflow listing script
+      run: python3 script.py
+      env:
+        ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
